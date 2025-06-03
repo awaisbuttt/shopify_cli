@@ -1,6 +1,65 @@
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Logo List",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Logo List",
+      "category": "Custom"
+    }
+  ]
+}
 {% endschema %}
+
+<style>
+.logo-marquee-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.logo-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 20s linear infinite;
+}
+
+.logo-marquee img {
+  height: 60px;
+  margin: 0 20px;
+  vertical-align: middle;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+</style>
+
+<div class="logo-marquee-wrapper">
+  <div class="logo-marquee">
+    {% for block in section.blocks %}
+      {% if block.settings.image %}
+        <img src="{{ block.settings.image | image_url: width: 200 }}" alt="Brand Logo">
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
