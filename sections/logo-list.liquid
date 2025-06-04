@@ -56,10 +56,14 @@
 
 <div class="logo-marquee-wrapper">
   <div class="logo-marquee">
+    <!-- Dynamically loaded logos via Theme Editor -->
     {% for block in section.blocks %}
       {% if block.settings.image %}
         <img src="{{ block.settings.image | image_url: width: 200 }}" alt="Brand Logo">
       {% endif %}
     {% endfor %}
+    
+    <!-- Manually added Pixabay logo -->
+    <img src="{{ 'a75ba105-3a75-4cfd-8c44-a9ddd84cc235.png' | file_url }}" alt="Pixabay Logo">
   </div>
 </div>
