@@ -3596,9 +3596,12 @@ details-disclosure > details {
   }
 }
 
-h1,h2,h3,h4,h5,h6{
-  color: rgb(0, 47, 255) !important;
+h1 , h2 , h3 , h4 , h5 , h6 {
+  color: red !important;
 }
 h1,h2,h3,h4,h5,h6{
-  color: rgb(0, 47, 255) !important;
+  color: white !important;
+}
+h1, h2, h3, h4, h5, h6{
+  color: rgb(0, 0, 0) !important;
 }

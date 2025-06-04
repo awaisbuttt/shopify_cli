@@ -36,7 +36,6 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/Untitled_design.png",
         "image_overlay_opacity": 40,
         "image_height": "large",
         "image_behavior": "none",
@@ -54,8 +53,8 @@
       "settings": {
         "collection": "all",
         "products_to_show": 8,
-        "title": "Product featured",
-        "heading_size": "h1",
+        "title": "Featured products",
+        "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
@@ -76,10 +75,105 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "logo_list_6EC7TR": {
+      "type": "logo-list",
+      "blocks": {
+        "image_Fp9LRA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/download.jpg",
+            "alt_text": "Logo"
+          }
+        },
+        "image_UwYRyX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images_4.png",
+            "alt_text": "Logo"
+          }
+        },
+        "image_B9LNMG": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images_5.png",
+            "alt_text": "Logo"
+          }
+        },
+        "image_feaLBm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images.jpg",
+            "alt_text": "Logo"
+          }
+        },
+        "image_XT4taX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images_6.png",
+            "alt_text": "Logo"
+          }
+        },
+        "image_j3Gctk": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images_4.jpg",
+            "alt_text": "Logo"
+          }
+        },
+        "image_qGFACH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images_1.png",
+            "alt_text": "Logo"
+          }
+        },
+        "image_4jNpMT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images.png",
+            "alt_text": "Logo"
+          }
+        },
+        "image_wU4xbM": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images_3.jpg",
+            "alt_text": "Logo"
+          }
+        },
+        "image_bBKVcf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/images_2.jpg",
+            "alt_text": "Logo"
+          }
+        }
+      },
+      "block_order": [
+        "image_Fp9LRA",
+        "image_UwYRyX",
+        "image_B9LNMG",
+        "image_feaLBm",
+        "image_XT4taX",
+        "image_j3Gctk",
+        "image_qGFACH",
+        "image_4jNpMT",
+        "image_wU4xbM",
+        "image_bBKVcf"
+      ],
+      "name": "Marquee Images",
+      "settings": {
+        "colorBackground": "#ffffff",
+        "marquee_height": 100,
+        "image_height": 78,
+        "link": ""
+      }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "logo_list_6EC7TR"
   ]
 }
