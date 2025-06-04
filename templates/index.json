@@ -164,9 +164,9 @@
       ],
       "name": "Marquee Images",
       "settings": {
-        "colorBackground": "#000000",
+        "colorBackground": "#ffffff",
         "marquee_height": 100,
-        "image_height": 60,
+        "image_height": 78,
         "link": ""
       }
     }
