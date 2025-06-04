@@ -6,65 +6,54 @@
     width: 100vw;
     max-width: 100%;
     overflow-x: hidden;
-    background:{{section.settings.colorBackground}}; 
+    background: {{ section.settings.colorBackground }}; 
+    color: {{ section.settings.colorText }};
   }
-  .section-{{ section.id }}.custom-marquee a {
-    text-decoration: none;
-  }
+
   .section-{{ section.id }}.custom-marquee .track {
     display: flex;
     align-items: center;
     white-space: nowrap;
     will-change: transform;
-    animation: marquee {{section.settings.speed}}s linear infinite;
+    animation: marquee 12s linear infinite;
   }
-  .section-{{ section.id }}.custom-marquee .image-content {
-    margin-right: {{section.settings.spacing}}px;
+
+  .section-{{ section.id }}.custom-marquee .content {
+    margin-right: 40px;
     padding-left: 5px;
-    display: flex;
-    align-items: center;
   }
-  .section-{{ section.id }}.custom-marquee .image-content img {
-    height: {{section.settings.image_height}}px;
+
+  .section-{{ section.id }}.custom-marquee .content img {
+    height: {{ section.settings.image_height | default: 40 }}px;
     width: auto;
-    object-fit: contain;
+    display: block;
   }
+
   @keyframes marquee {
     from {
       transform: translateX(0);
     }
     to {
-      transform: translateX(-50%);
+      transform: translateX(-20%);
     }
   }
 </style>
+
 <div class="section-{{ section.id }} custom-marquee" role="region" {{ block.shopify_attributes }}>
   {%- if section.settings.link != blank -%}
-    <a href="{{ section.settings.link }}" class="">
+    <a href="{{ section.settings.link }}">
   {%- endif -%}
-      <div class="track">
+    <div class="track">
+      {%- for i in (1..6) -%}
         {%- for block in section.blocks -%}
-          <div class="image-content">
-            {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | img_url: '300x' }}" 
-                   alt="{{ block.settings.image.alt | escape }}" 
-                   loading="lazy">
-            {%- endif -%}
-          </div>
+          {% if block.settings.image != blank %}
+            <span class="content marquee-image">
+              <img src="{{ block.settings.image | img_url: 'master' }}" alt="Logo" loading="lazy" />
+            </span>
+          {% endif %}
         {%- endfor -%}
-        {%- for block in section.blocks -%}
-          <div class="image-content">
-            {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | img_url: '300x' }}" 
-                   alt="{{ block.settings.image.alt | escape }}" 
-                   loading="lazy">
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
-        {%- if section.settings.link != blank -%}
-          {% render 'icon-arrow' %}
-        {%- endif -%}
-      </div>
+      {%- endfor -%}
+    </div>
   {%- if section.settings.link != blank -%}
     </a>
   {%- endif -%}
@@ -78,12 +67,18 @@
       "type": "color",
       "id": "colorBackground",
       "label": "Background color",
-      "default": "#000"
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "colorText",
+      "label": "Text color (unused here)",
+      "default": "#ffffff"
     },
     {
       "type": "url",
       "id": "link",
-      "label": "Link"
+      "label": "Optional link for entire marquee"
     },
     {
       "type": "range",
@@ -91,47 +86,29 @@
       "min": 24,
       "max": 200,
       "step": 2,
-      "default": 80,
+      "default": 60,
       "label": "Marquee height"
     },
     {
       "type": "range",
       "id": "image_height",
-      "min": 20,
-      "max": 200,
-      "step": 5,
-      "default": 50,
-      "label": "Image height (px)"
-    },
-    {
-      "type": "range",
-      "id": "spacing",
-      "min": 0,
-      "max": 100,
-      "step": 5,
+      "min": 10,
+      "max": 150,
+      "step": 2,
       "default": 40,
-      "label": "Spacing between images (px)"
-    },
-    {
-      "type": "range",
-      "id": "speed",
-      "min": 5,
-      "max": 60,
-      "step": 1,
-      "default": 20,
-      "label": "Animation speed (seconds)"
+      "label": "Image height"
     }
   ],
   "blocks": [
     {
       "type": "image",
-      "name": "Image",
+      "name": "Image/Logo",
       "limit": 20,
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Upload image or logo"
         }
       ]
     }
