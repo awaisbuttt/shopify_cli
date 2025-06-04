@@ -2,20 +2,7 @@
 {
   "name": "Logo List",
   "settings": [],
-  "blocks": [
-    {
-      "type": "logo",
-      "name": "Logo",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Logo Image"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 20,
+  "blocks": [],
   "presets": [
     {
       "name": "Logo List",
@@ -56,10 +43,9 @@
 
 <div class="logo-marquee-wrapper">
   <div class="logo-marquee">
-    {% for block in section.blocks %}
-      {% if block.settings.image %}
-        <img src="{{ block.settings.image | image_url: width: 200 }}" alt="Brand Logo">
-      {% endif %}
-    {% endfor %}
+    <!-- Hardcoded logo example -->
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnm_ZXjj2OblXt1zjEfc7dO0AIdBrEVptqpw&s" alt="Brand Logo">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnm_ZXjj2OblXt1zjEfc7dO0AIdBrEVptqpw&s" alt="Brand Logo">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnm_ZXjj2OblXt1zjEfc7dO0AIdBrEVptqpw&s" alt="Brand Logo">
   </div>
 </div>
