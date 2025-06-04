@@ -1,12 +1,16 @@
-<div class="logo-marquee-wrapper">
-  <div class="logo-marquee">
-    <!-- Demo image URLs (replace these with your own hosted URLs) -->
-    <img src="https://via.placeholder.com/200x120?text=Suit" alt="Suit">
-    <img src="https://via.placeholder.com/200x120?text=Casio+Watch" alt="Casio Watch">
-    <img src="https://via.placeholder.com/200x120?text=Suit" alt="Suit">
-    <img src="https://via.placeholder.com/200x120?text=Casio+Watch" alt="Casio Watch">
-  </div>
-</div>
+{% schema %}
+{
+  "name": "Logo List",
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Logo List",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
 
 <style>
 .logo-marquee-wrapper {
@@ -22,8 +26,8 @@
 }
 
 .logo-marquee img {
-  height: 120px; /* Size increased */
-  margin: 0 30px;
+  height: 60px;
+  margin: 0 20px;
   vertical-align: middle;
 }
 
@@ -36,3 +40,12 @@
   }
 }
 </style>
+
+<div class="logo-marquee-wrapper">
+  <div class="logo-marquee">
+    <!-- Hardcoded logo example -->
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnm_ZXjj2OblXt1zjEfc7dO0AIdBrEVptqpw&s" alt="Brand Logo">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnm_ZXjj2OblXt1zjEfc7dO0AIdBrEVptqpw&s" alt="Brand Logo">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnm_ZXjj2OblXt1zjEfc7dO0AIdBrEVptqpw&s" alt="Brand Logo">
+  </div>
+</div>   
