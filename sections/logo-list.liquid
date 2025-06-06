@@ -96,8 +96,10 @@
 
   .section-{{ section.id }}.custom-marquee .content img {
     height: {{ section.settings.image_height }}px;
-    width: auto;
+    width: {{ section.settings.image_height }}px;
     display: block;
+    object-fit: cover;
+    border-radius: 50%; /* 🔵 Makes the image circular */
   }
 
   @keyframes marquee {
