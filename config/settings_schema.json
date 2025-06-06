@@ -1449,7 +1449,13 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
-      }
+      },
+      {
+  "type": "text",
+  "id": "your_new_textbox_id",
+  "label": "Your Text Box Label",
+  "placeholder": "Enter your text here"
+}
     ]
   }
 ]
