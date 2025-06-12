@@ -86,6 +86,7 @@
         "category_mRPBYw",
         "category_mqTB33"
       ],
+      "disabled": true,
       "name": "Category Navigation",
       "settings": {
         "background_color": "#ffffff",

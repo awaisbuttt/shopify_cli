@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
@@ -20,7 +21,24 @@
       "type": "contact-form",
       "settings": {
         "heading": "",
-        "heading_size": "h1",
+        "subtitle": "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+        "button_text": "Send Message",
+        "show_contact_info": true,
+        "address": "",
+        "phone": "",
+        "email": "",
+        "heading_size_px": 42,
+        "background_color": "#f8fafc",
+        "background_gradient": "#e2e8f0",
+        "heading_color": "#1e293b",
+        "subtitle_color": "#64748b",
+        "accent_color": "#3b82f6",
+        "accent_color_2": "#8b5cf6",
+        "input_bg_color": "#ffffff",
+        "input_border_color": "#e2e8f0",
+        "button_bg_color": "#3b82f6",
+        "button_bg_gradient": "#1d4ed8",
+        "button_text_color": "#ffffff",
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36

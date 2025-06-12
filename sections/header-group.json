@@ -28,7 +28,7 @@
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,
@@ -38,20 +38,16 @@
     "header": {
       "type": "header",
       "settings": {
-        "logo_position": "middle-left",
-        "mobile_logo_position": "center",
-        "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "enable_customer_avatar": true,
-        "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "main_menu": "main-menu",
+        "search_placeholder": "Search",
+        "store_locator_url": "",
+        "store_locator_text": "Find a Store",
+        "account_text": "Sign In | Join",
+        "header_bg_color": "#ffffff",
+        "header_text_color": "#000000",
+        "logo_bg_color": "#000000",
+        "logo_text_color": "#ffffff",
+        "accent_color": "#000000"
       }
     }
   },

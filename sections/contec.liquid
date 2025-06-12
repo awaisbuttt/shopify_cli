@@ -1,0 +1,396 @@
+<style>
+  .promotional-banners {
+    padding: {{ section.settings.section_padding_top | default: 60 }}px 0 {{ section.settings.section_padding_bottom | default: 60 }}px;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  
+  .promotional-banners__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .promotional-banners__title {
+    font-size: {{ section.settings.heading_size | default: 32 }}px;
+    font-weight: bold;
+    color: #000000;
+    margin: 0 0 32px 0;
+    text-align: center;
+  }
+  
+  .promotional-banners__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .promo-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .promo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  
+  .promo-card__image-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* 1:1 Aspect Ratio */
+    overflow: hidden;
+  }
+  
+  .promo-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .promo-card:hover .promo-card__image {
+    transform: scale(1.05);
+  }
+  
+  .promo-card__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+  
+  .promo-card__logo {
+    max-width: 120px;
+    max-height: 40px;
+    margin-bottom: 8px;
+  }
+  
+  .promo-card__logo-container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .promo-card__title {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    max-width: 80%;
+  }
+  
+  .promo-card__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .promo-card__button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+  }
+  
+  .promo-card__button:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+  
+  /* Mobile Responsive */
+  @media screen and (max-width: 1024px) {
+    .promotional-banners__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .promo-card__title {
+      font-size: 28px;
+    }
+  }
+  
+  @media screen and (max-width: 640px) {
+    .promotional-banners__grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .promotional-banners__wrapper {
+      padding: 0 16px;
+    }
+    
+    .promo-card__title {
+      font-size: 24px;
+    }
+    
+    .promo-card__image-container {
+      padding-bottom: 75%; /* 4:3 Aspect Ratio for mobile */
+    }
+  }
+</style>
+
+<section class="promotional-banners">
+  <div class="promotional-banners__wrapper">
+    {% if section.settings.heading != blank %}
+      <h2 class="promotional-banners__title">{{ section.settings.heading }}</h2>
+    {% endif %}
+    
+    <div class="promotional-banners__grid">
+      {% for block in section.blocks %}
+        <div class="promo-card">
+          <div class="promo-card__image-container">
+            {% if block.settings.promo_image != blank %}
+              <img 
+                src="{{ block.settings.promo_image | img_url: '800x800', crop: 'center' }}" 
+                alt="{{ block.settings.promo_title | escape }}"
+                class="promo-card__image"
+                loading="lazy"
+              >
+            {% else %}
+              <div style="background-color: #f3f4f6; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #9ca3af;">
+                No Image
+              </div>
+            {% endif %}
+            
+            <div class="promo-card__content">
+              <div>
+                {% if block.settings.logo_image != blank %}
+                  <div class="promo-card__logo-container">
+                    <img 
+                      src="{{ block.settings.logo_image | img_url: '200x80' }}" 
+                      alt="Logo"
+                      class="promo-card__logo"
+                      loading="lazy"
+                    >
+                    {% if block.settings.secondary_logo != blank %}
+                      <img 
+                        src="{{ block.settings.secondary_logo | img_url: '200x80' }}" 
+                        alt="Secondary Logo"
+                        class="promo-card__logo"
+                        loading="lazy"
+                      >
+                    {% endif %}
+                  </div>
+                {% endif %}
+                
+              
+              </div>
+              
+              <div class="promo-card__buttons">
+                {% if block.settings.button_text != blank and block.settings.button_url != blank %}
+                  <a href="{{ block.settings.button_url }}" class="promo-card__button">
+                    {{ block.settings.button_text }}
+                  </a>
+                {% endif %}
+                
+                {% if block.settings.second_button_text != blank and block.settings.second_button_url != blank %}
+                  <a href="{{ block.settings.second_button_url }}" class="promo-card__button">
+                    {{ block.settings.second_button_text }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      
+      {% if section.blocks.size == 0 %}
+        <!-- Default promos for preview -->
+        <div class="promo-card">
+          <div class="promo-card__image-container">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-QNl3wPKeBQVx7vPqdIcPMnOPcW1rQM.png" alt="Father's Day Sweepstakes" class="promo-card__image" style="object-position: 0% 50%;">
+            <div class="promo-card__content">
+              <div>
+                <img src="{{ 'flx-logo.png' | asset_url }}" alt="FLX Logo" class="promo-card__logo" onerror="this.style.display='none';">
+                
+              </div>
+              <div class="promo-card__buttons">
+                <a href="#" class="promo-card__button">ENTER NOW</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="promo-card">
+          <div class="promo-card__image-container">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-QNl3wPKeBQVx7vPqdIcPMnOPcW1rQM.png" alt="NBA Finals" class="promo-card__image" style="object-position: 33% 50%;">
+            <div class="promo-card__content">
+              <div>
+                <div class="promo-card__logo-container">
+                  <img src="{{ 'nba-logo.png' | asset_url }}" alt="NBA Logo" class="promo-card__logo" onerror="this.style.display='none';">
+                  <img src="{{ 'foot-locker-logo.png' | asset_url }}" alt="Foot Locker Logo" class="promo-card__logo" onerror="this.style.display='none';">
+                </div>
+               
+              </div>
+              <div class="promo-card__buttons">
+                <a href="#" class="promo-card__button">SHOP BASKETBALL</a>
+                <a href="#" class="promo-card__button">SHOP THE CLINIC</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="promo-card">
+          <div class="promo-card__image-container">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-QNl3wPKeBQVx7vPqdIcPMnOPcW1rQM.png" alt="Diamond-Ready Styles" class="promo-card__image" style="object-position: 66% 50%;">
+            <div class="promo-card__content">
+              <div>
+                
+              </div>
+              <div class="promo-card__buttons">
+                <a href="#" class="promo-card__button">SHOP BASEBALL</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promotional Banners",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading"
+    },
+    {
+      "type": "number",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 60,
+      "label": "Top padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 60,
+      "label": "Bottom padding"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promotion",
+      "name": "Promotion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "promo_title",
+          "label": "Promotion title",
+          "default": "Promotion Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image",
+          "label": "Promotion image"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo image (optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "secondary_logo",
+          "label": "Secondary logo (optional)"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "text",
+          "id": "second_button_text",
+          "label": "Second button text (optional)"
+        },
+        {
+          "type": "url",
+          "id": "second_button_url",
+          "label": "Second button URL (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promotional Banners",
+      "blocks": [
+        {
+          "type": "promotion",
+          "settings": {
+            "promo_title": "FATHER'S DAY SWEEPSTAKES",
+            "button_text": "ENTER NOW"
+          }
+        },
+        {
+          "type": "promotion",
+          "settings": {
+            "promo_title": "NBA FINALS ARE HERE",
+            "button_text": "SHOP BASKETBALL",
+            "second_button_text": "SHOP THE CLINIC"
+          }
+        },
+        {
+          "type": "promotion",
+          "settings": {
+            "promo_title": "DIAMOND-READY STYLES",
+            "button_text": "SHOP BASEBALL"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

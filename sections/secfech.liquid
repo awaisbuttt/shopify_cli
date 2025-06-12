@@ -1,0 +1,452 @@
+<style>
+  .category-navigation {
+    padding: {{ section.settings.section_padding_top | default: 20 }}px 0 {{ section.settings.section_padding_bottom | default: 20 }}px;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  
+  .category-navigation__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .category-navigation__grid {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .category-navigation__grid::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .category-card {
+    flex: 0 0 auto;
+    width: {{ section.settings.card_width | default: 180 }}px;
+    height: {{ section.settings.card_height | default: 220 }}px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .category-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .category-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .category-card:hover .category-card__image {
+    transform: scale(1.05);
+  }
+  
+  .category-card__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    padding: 20px 12px 12px;
+  }
+  
+  .category-card__title {
+    color: {{ section.settings.text_color | default: '#000000' }};
+    font-size: {{ section.settings.text_size | default: 12 }}px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    text-align: center;
+    background-color: rgba(255,255,255,0.9);
+    padding: 8px 4px;
+    border-radius: 2px;
+  }
+  
+  .category-card--sale {
+    background-color: {{ section.settings.sale_bg_color | default: '#dc2626' }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .category-card--sale .category-card__title {
+    color: {{ section.settings.sale_text_color | default: '#ffffff' }};
+    background-color: transparent;
+    font-size: {{ section.settings.sale_text_size | default: 24 }}px;
+    font-weight: 800;
+  }
+  
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    .category-navigation__wrapper {
+      padding: 0 16px;
+    }
+    
+    .category-navigation__grid {
+      gap: 8px;
+    }
+    
+    .category-card {
+      width: {{ section.settings.mobile_card_width | default: 140 }}px;
+      height: {{ section.settings.mobile_card_height | default: 180 }}px;
+    }
+    
+    .category-card__title {
+      font-size: {{ section.settings.mobile_text_size | default: 10 }}px;
+      padding: 6px 2px;
+    }
+    
+    .category-card--sale .category-card__title {
+      font-size: {{ section.settings.mobile_sale_text_size | default: 20 }}px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .category-card {
+      width: {{ section.settings.mobile_card_width | default: 120 }}px;
+      height: {{ section.settings.mobile_card_height | default: 160 }}px;
+    }
+  }
+</style>
+
+<section class="category-navigation" id="section-{{ section.id }}">
+  <div class="category-navigation__wrapper">
+    <div class="category-navigation__grid">
+      {% for block in section.blocks %}
+        {% if block.settings.category_url != blank %}
+          <a href="{{ block.settings.category_url }}" class="category-card{% if block.settings.is_sale %} category-card--sale{% endif %}" {{ block.shopify_attributes }}>
+        {% else %}
+          <div class="category-card{% if block.settings.is_sale %} category-card--sale{% endif %}" {{ block.shopify_attributes }}>
+        {% endif %}
+        
+          {% unless block.settings.is_sale %}
+            {% if block.settings.category_image != blank %}
+              <img 
+                src="{{ block.settings.category_image | img_url: '400x500', crop: 'center' }}" 
+                alt="{{ block.settings.category_title | escape }}"
+                class="category-card__image"
+                loading="lazy"
+              >
+            {% else %}
+              <div style="background-color: #f3f4f6; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #9ca3af;">
+                No Image
+              </div>
+            {% endif %}
+            
+            <div class="category-card__overlay">
+              <h3 class="category-card__title">
+                {{ block.settings.category_title | default: 'Category' }}
+              </h3>
+            </div>
+          {% else %}
+            <h3 class="category-card__title">
+              {{ block.settings.category_title | default: 'SALE' }}
+            </h3>
+          {% endunless %}
+          
+        {% if block.settings.category_url != blank %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      
+      {% if section.blocks.size == 0 %}
+        <a href="/collections/shoes" class="category-card">
+          <div style="background-color: #e5e7eb; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #6b7280;">SHOES</span>
+          </div>
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">SHOES</h3>
+          </div>
+        </a>
+        
+        <a href="/collections/clothing" class="category-card">
+          <div style="background-color: #d1d5db; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #6b7280;">CLOTHING</span>
+          </div>
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">CLOTHING</h3>
+          </div>
+        </a>
+        
+        <a href="/collections/basketball" class="category-card">
+          <div style="background-color: #f3f4f6; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #6b7280;">BASKETBALL</span>
+          </div>
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">BASKETBALL</h3>
+          </div>
+        </a>
+        
+        <a href="/collections/running" class="category-card">
+          <div style="background-color: #e5e7eb; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #6b7280;">RUNNING</span>
+          </div>
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">RUNNING</h3>
+          </div>
+        </a>
+        
+        <a href="/collections/lifestyle" class="category-card">
+          <div style="background-color: #d1d5db; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #6b7280;">LIFESTYLE</span>
+          </div>
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">LIFESTYLE</h3>
+          </div>
+        </a>
+        
+        <a href="/collections/new-arrivals" class="category-card">
+          <div style="background-color: #f3f4f6; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #6b7280;">NEW ARRIVALS</span>
+          </div>
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">NEW ARRIVALS</h3>
+          </div>
+        </a>
+        
+        <a href="/collections/sale" class="category-card category-card--sale">
+          <h3 class="category-card__title">SALE</h3>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category Navigation",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 20,
+      "label": "Top padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 20,
+      "label": "Bottom padding"
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "min": 120,
+      "max": 250,
+      "step": 10,
+      "default": 180,
+      "label": "Card width (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "min": 150,
+      "max": 300,
+      "step": 10,
+      "default": 220,
+      "label": "Card height (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_width",
+      "min": 100,
+      "max": 180,
+      "step": 10,
+      "default": 140,
+      "label": "Card width (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_height",
+      "min": 120,
+      "max": 220,
+      "step": 10,
+      "default": 180,
+      "label": "Card height (mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Text Settings"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 12,
+      "label": "Text size (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "default": 10,
+      "label": "Text size (mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Sale Card Settings"
+    },
+    {
+      "type": "color",
+      "id": "sale_bg_color",
+      "label": "Sale background color",
+      "default": "#dc2626"
+    },
+    {
+      "type": "color",
+      "id": "sale_text_color",
+      "label": "Sale text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "sale_text_size",
+      "min": 18,
+      "max": 32,
+      "step": 2,
+      "default": 24,
+      "label": "Sale text size (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_sale_text_size",
+      "min": 16,
+      "max": 24,
+      "step": 2,
+      "default": 20,
+      "label": "Sale text size (mobile)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_title",
+          "label": "Category title",
+          "default": "Category"
+        },
+        {
+          "type": "image_picker",
+          "id": "category_image",
+          "label": "Category image"
+        },
+        {
+          "type": "url",
+          "id": "category_url",
+          "label": "Category URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_sale",
+          "label": "Is this a sale card?",
+          "default": false,
+          "info": "Check this to make it a solid color sale card without image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Navigation",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "SHOES",
+            "category_url": "/collections/shoes"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "CLOTHING",
+            "category_url": "/collections/clothing"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "BASKETBALL",
+            "category_url": "/collections/basketball"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "RUNNING",
+            "category_url": "/collections/running"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "LIFESTYLE",
+            "category_url": "/collections/lifestyle"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "NEW ARRIVALS",
+            "category_url": "/collections/new-arrivals"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "SALE",
+            "category_url": "/collections/sale",
+            "is_sale": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
