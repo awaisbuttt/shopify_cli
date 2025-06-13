@@ -66,8 +66,8 @@
         "layout": "full_bleed",
         "slide_height": "small",
         "slider_visual": "counter",
-        "auto_rotate": false,
-        "change_slides_speed": 5,
+        "auto_rotate": true,
+        "change_slides_speed": 3,
         "image_behavior": "none",
         "show_text_below": true,
         "accessibility_info": "Slideshow about our brand"
@@ -81,7 +81,7 @@
           "settings": {
             "category_name": "UNSTITCHED",
             "category_image": "shopify://shop_images/250203-fl-flca-recjRgspr-womens-plp-story-cards-7.webp",
-            "category_link": "/collections/unstitched"
+            "category_link": "shopify://collections/frontpage"
           }
         },
         "category_EckxaM": {
@@ -89,7 +89,7 @@
           "settings": {
             "category_name": "WESTERN",
             "category_image": "shopify://shop_images/250203-fl-flca-recjRgspr-womens-plp-story-cards-2.webp",
-            "category_link": "/collections/western"
+            "category_link": "shopify://collections/frontpage"
           }
         },
         "category_bQ7Xbi": {
@@ -97,7 +97,7 @@
           "settings": {
             "category_name": "EASTERN",
             "category_image": "shopify://shop_images/250203-fl-flca-recjRgspr-womens-plp-story-cards-3.webp",
-            "category_link": "/collections/eastern"
+            "category_link": "shopify://collections/frontpage"
           }
         },
         "category_qBCQpH": {
@@ -105,7 +105,7 @@
           "settings": {
             "category_name": "SHOES",
             "category_image": "shopify://shop_images/250203-fl-flca-recjRgspr-womens-plp-story-cards-4.webp",
-            "category_link": "/collections/shoes"
+            "category_link": "shopify://collections/frontpage"
           }
         }
       },
