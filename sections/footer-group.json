@@ -11,6 +11,21 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "costomer_k8rNA4": {
+      "type": "costomer",
+      "name": "Three Image Columns",
+      "settings": {
+        "image_1": "shopify://shop_images/bag_cat_banner.webp",
+        "title_1": "Bags",
+        "link_1": "",
+        "image_2": "shopify://shop_images/shoecare_cat_banner.webp",
+        "title_2": "Shoe Care",
+        "link_2": "",
+        "image_3": "shopify://shop_images/beltsandmore_cat_banner.webp",
+        "title_3": "Belts & More",
+        "link_3": ""
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -42,6 +57,7 @@
     }
   },
   "order": [
+    "costomer_k8rNA4",
     "footer"
   ]
 }

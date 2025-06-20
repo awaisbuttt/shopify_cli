@@ -1,496 +1,188 @@
 <style>
-  .site-header {
-    background-color: {{ section.settings.header_bg_color }};
-    color: {{ section.settings.header_text_color }};
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  .header-top-bar {
+    background-color: #2d5a3d;
+    color: white;
+    padding: 8px 0;
+    font-size: 14px;
   }
   
-  .header-wrapper {
+  .header-top-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .header-top-bar a:hover {
+    text-decoration: underline;
+  }
+  
+  .main-header {
+    background-color: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  .header-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-  }
-  
-  .header-main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
   }
   
-  .header-logo {
+  .logo img {
+    height: 40px;
+  }
+  
+  .main-nav {
     display: flex;
-    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+  }
+  
+  .main-nav a {
+    color: #333;
     text-decoration: none;
-    color: inherit;
+    font-weight: 500;
+    font-size: 16px;
   }
   
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-    background-color: {{ section.settings.logo_bg_color }};
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    color: {{ section.settings.logo_text_color }};
+  .main-nav a:hover {
+    color: #2d5a3d;
   }
   
-  .logo-text {
-    font-size: 20px;
-    font-weight: bold;
-    display: none;
+  .main-nav .sale-link {
+    color: #e74c3c;
   }
   
-  .header-search {
-    flex: 1;
-    max-width: 400px;
-    margin: 0 32px;
+  .search-container {
     position: relative;
-    display: none;
-  }
-  
-  .search-form {
-    position: relative;
-    width: 100%;
   }
   
   .search-input {
-    width: 100%;
-    height: 40px;
-    padding: 0 40px 0 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    background-color: #f9fafb;
+    padding: 10px 40px 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 250px;
     font-size: 14px;
-  }
-  
-  .search-input:focus {
-    outline: none;
-    border-color: {{ section.settings.accent_color }};
-    box-shadow: 0 0 0 1px {{ section.settings.accent_color }};
   }
   
   .search-button {
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 40px;
-    width: 40px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0 6px 6px 0;
-    border-left: 1px solid #d1d5db;
-  }
-  
-  .search-button:hover {
-    background-color: #f3f4f6;
-  }
-  
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  
-  .header-action {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 12px;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: all 0.2s;
-  }
-  
-  .header-action:hover {
-    background-color: rgba(0,0,0,0.05);
-    color: inherit;
-  }
-  
-  .cart-link {
-    position: relative;
-    padding: 8px;
-  }
-  
-  .cart-count {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    background-color: #dc2626;
-    color: white;
-    font-size: 12px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-  }
-  
-  .mobile-menu-toggle {
-    display: none;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
-    color: inherit;
   }
   
-  .header-nav {
-    border-top: 1px solid rgba(0,0,0,0.1);
+  .cart-icon {
+    margin-left: 5px;
   }
   
-  .nav-list {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    padding: 8px 0;
-    margin: 0;
-    list-style: none;
-  }
-  
-  .nav-item a {
-    text-decoration: none;
-    color: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 8px 0;
-    transition: color 0.2s;
-  }
-  
-  .nav-item a:hover {
-    color: {{ section.settings.accent_color }};
-  }
-  
-  .nav-item.highlight a {
-    color: #dc2626;
-  }
-  
-  .nav-item.special a {
-    color: #7c3aed;
-  }
-  
-  .mobile-search {
-    padding: 16px 0;
-    display: none;
-  }
-  
-  .mobile-menu {
-    display: none;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    background-color: #f9fafb;
-    padding: 16px 0;
-  }
-  
-  .mobile-menu.active {
-    display: block;
-  }
-  
-  .mobile-menu-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 0;
-    text-decoration: none;
-    color: inherit;
-    font-size: 14px;
-  }
-  
-  .mobile-menu-item:hover {
-    background-color: rgba(0,0,0,0.05);
-  }
-  
-  /* Responsive */
-  @media (min-width: 640px) {
-    .logo-text {
-      display: block;
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      gap: 15px;
     }
-  }
-  
-  @media (min-width: 768px) {
-    .header-search {
-      display: block;
+    
+    .main-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
     }
-    .mobile-search {
-      display: none;
-    }
-    .mobile-menu-toggle {
-      display: none;
-    }
-    .header-nav {
-      display: block;
-    }
-  }
-  
-  @media (max-width: 767px) {
-    .header-nav {
-      display: none;
-    }
-    .mobile-menu-toggle {
-      display: block;
-    }
-    .mobile-search {
-      display: block;
-    }
-    .header-action.desktop-only {
-      display: none;
+    
+    .search-input {
+      width: 200px;
     }
   }
 </style>
 
-<header class="site-header">
-  <div class="header-wrapper">
-    <!-- Main Header -->
-    <div class="header-main">
-      <!-- Logo -->
-      <a href="{{ routes.root_url }}" class="header-logo">
-        {% if section.settings.logo != blank %}
-          <img src="{{ section.settings.logo | img_url: '120x' }}" alt="{{ shop.name }}" style="max-height: 40px;">
-        {% else %}
-          <div class="logo-icon">FL</div>
-          <span class="logo-text">{{ shop.name }}</span>
+<!-- Top Bar -->
+<div class="header-top-bar">
+  <div class="header-container">
+    <div style="margin-left: auto;">
+      <a href="{{ routes.cart_url }}">
+        🛒 Cart
+        {% if cart.item_count > 0 %}
+          ({{ cart.item_count }})
         {% endif %}
       </a>
+      |
+      <a href="{{ pages['find-store'].url | default: '#' }}">Find Store</a>
+      |
+      {% if customer %}
+        <a href="{{ routes.account_url }}">My Account</a>
+      {% else %}
+        <a href="{{ routes.account_login_url }}">Sign In</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
 
-      <!-- Desktop Search -->
-      <div class="header-search">
-        <form action="{{ routes.search_url }}" method="get" class="search-form">
-          <input 
-            type="search" 
-            name="q" 
-            placeholder="{{ section.settings.search_placeholder | default: 'Search' }}"
-            value="{{ search.terms | escape }}"
-            class="search-input"
-          >
-          <button type="submit" class="search-button">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.35-4.35"></path>
-            </svg>
-          </button>
-        </form>
-      </div>
-
-      <!-- Header Actions -->
-      <div class="header-actions">
-        <!-- Store Locator -->
-        {% if section.settings.store_locator_url != blank %}
-          <a href="{{ section.settings.store_locator_url }}" class="header-action desktop-only">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span>{{ section.settings.store_locator_text | default: 'Find a Store' }}</span>
-          </a>
+<!-- Main Header -->
+<header class="main-header">
+  <div class="header-container">
+    <!-- Logo -->
+    <div class="logo">
+      <a href="{{ routes.root_url }}">
+        {% if section.settings.logo %}
+          <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }}" loading="lazy">
+        {% else %}
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'%3E%3Cg fill='%232d5a3d'%3E%3Ccircle cx='20' cy='20' r='3'/%3E%3Cpath d='M15 10h10v5h-10zM12 15h16v10h-16z'/%3E%3C/g%3E%3Ctext x='35' y='25' font-family='Arial' font-size='16' font-weight='bold' fill='%232d5a3d'%3EWOODLAND%3C/text%3E%3C/svg%3E" alt="{{ shop.name }}">
         {% endif %}
-
-        <!-- Account -->
-        <a href="{{ routes.account_url }}" class="header-action desktop-only">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-          <span>
-            {% if customer %}
-              {{ customer.first_name }}
-            {% else %}
-              {{ section.settings.account_text | default: 'Sign In | Join' }}
-            {% endif %}
-          </span>
-        </a>
-
-        <!-- Cart -->
-        <a href="{{ routes.cart_url }}" class="header-action cart-link">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z"></path>
-            <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z"></path>
-            <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6"></path>
-          </svg>
-          {% if cart.item_count > 0 %}
-            <span class="cart-count">{{ cart.item_count }}</span>
-          {% endif %}
-        </a>
-
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
+      </a>
     </div>
 
-    <!-- Mobile Search -->
-    <div class="mobile-search">
-      <form action="{{ routes.search_url }}" method="get" class="search-form">
-        <input 
-          type="search" 
-          name="q" 
-          placeholder="{{ section.settings.search_placeholder | default: 'Search' }}"
-          value="{{ search.terms | escape }}"
-          class="search-input"
-        >
+    <!-- Main Navigation -->
+    <nav>
+      <ul class="main-nav">
+        {% for link in linklists[section.settings.main_menu].links %}
+          <li>
+            <a href="{{ link.url }}" 
+               {% if link.title == 'Sale' %}class="sale-link"{% endif %}>
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- Search -->
+    <div class="search-container">
+      <form action="{{ routes.search_url }}" method="get">
+        <input type="search" 
+               name="q" 
+               class="search-input" 
+               placeholder="Search" 
+               value="{{ search.terms | escape }}"
+               autocomplete="off">
         <button type="submit" class="search-button">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
+          🔍
         </button>
       </form>
     </div>
   </div>
-
-  <!-- Navigation -->
-  <nav class="header-nav">
-    <div class="header-wrapper">
-      <ul class="nav-list">
-        {% for link in linklists[section.settings.main_menu].links %}
-          <li class="nav-item {% if link.title contains 'Sale' %}highlight{% elsif link.title contains 'Reward' %}special{% endif %}">
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="header-wrapper">
-      {% if section.settings.store_locator_url != blank %}
-        <a href="{{ section.settings.store_locator_url }}" class="mobile-menu-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
-          </svg>
-          {{ section.settings.store_locator_text | default: 'Find a Store' }}
-        </a>
-      {% endif %}
-      
-      <a href="{{ routes.account_url }}" class="mobile-menu-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-        {% if customer %}
-          {{ customer.first_name }}
-        {% else %}
-          {{ section.settings.account_text | default: 'Sign In | Join' }}
-        {% endif %}
-      </a>
-    </div>
-  </div>
 </header>
-
-<script>
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('active');
-  }
-</script>
 
 {% schema %}
 {
   "name": "Header",
   "settings": [
     {
-      "type": "header",
-      "content": "Logo"
-    },
-    {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo image"
-    },
-    {
-      "type": "header",
-      "content": "Navigation"
+      "label": "Logo"
     },
     {
       "type": "link_list",
       "id": "main_menu",
       "label": "Main menu",
       "default": "main-menu"
-    },
-    {
-      "type": "header",
-      "content": "Search"
-    },
-    {
-      "type": "text",
-      "id": "search_placeholder",
-      "label": "Search placeholder text",
-      "default": "Search"
-    },
-    {
-      "type": "header",
-      "content": "Store Locator"
-    },
-    {
-      "type": "url",
-      "id": "store_locator_url",
-      "label": "Store locator URL"
-    },
-    {
-      "type": "text",
-      "id": "store_locator_text",
-      "label": "Store locator text",
-      "default": "Find a Store"
-    },
-    {
-      "type": "text",
-      "id": "account_text",
-      "label": "Account text",
-      "default": "Sign In | Join"
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "header_bg_color",
-      "label": "Header background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "header_text_color",
-      "label": "Header text",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "logo_bg_color",
-      "label": "Logo background",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "logo_text_color",
-      "label": "Logo text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent color",
-      "default": "#000000"
     }
   ]
 }

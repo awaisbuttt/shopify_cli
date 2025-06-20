@@ -1,0 +1,259 @@
+<style>
+  .split-hero {
+    display: flex;
+    min-height: 500px;
+    width: 100%;
+  }
+
+  .hero-section {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .hero-section:hover {
+    transform: scale(1.02);
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-section:hover .hero-image {
+    transform: scale(1.05);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+    color: white;
+  }
+
+  .hero-title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+    color: white !important;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
+    color: white !important;
+  }
+
+  .hero-btn {
+    background-color: #2d5a3d;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .hero-btn:hover {
+    background-color: #1e3d2a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .mens-section {
+    background: linear-gradient(135deg, #8B7355, #A0845C);
+  }
+
+  .womens-section {
+    background: linear-gradient(135deg, #4A90E2, #7BB3F0);
+  }
+
+  @media (max-width: 768px) {
+    .split-hero {
+      flex-direction: column;
+      min-height: 600px;
+    }
+
+    .hero-section {
+      min-height: 300px;
+    }
+
+    .hero-overlay {
+      padding: 30px 20px;
+      text-align: center;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 36px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 28px;
+    }
+
+    .hero-overlay {
+      padding: 20px 15px;
+    }
+
+    .hero-btn {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<section class="split-hero">
+  <!-- Men's Section -->
+  <div class="hero-section mens-section">
+    <a href="{{ section.settings.mens_link | default: collections['mens-apparel'].url | default: '/collections/mens-apparel' }}">
+      {% if section.settings.mens_image %}
+        <img src="{{ section.settings.mens_image | img_url: '800x600' }}" 
+             alt="{{ section.settings.mens_title | default: 'Shop Mens Apparel' }}" 
+             class="hero-image" 
+             loading="lazy">
+      {% else %}
+        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #8B7355, #A0845C); display: flex; align-items: center; justify-content: center;">
+          <div style="color: white; font-size: 72px;">👔</div>
+        </div>
+      {% endif %}
+
+      <div class="hero-overlay">
+        <h2 class="hero-title" style="color: white;">{{ section.settings.mens_title | default: "Shop Men's Apparel" }}</h2>
+        {% if section.settings.mens_subtitle %}
+          <p class="hero-subtitle" style="color: white;">{{ section.settings.mens_subtitle }}</p>
+        {% endif %}
+        <span class="hero-btn">{{ section.settings.mens_button_text | default: "Shop Now" }}</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- Women's Section -->
+  <div class="hero-section womens-section">
+    <a href="{{ section.settings.womens_link | default: collections['womens-apparel'].url | default: '/collections/womens-apparel' }}">
+      {% if section.settings.womens_image %}
+        <img src="{{ section.settings.womens_image | img_url: '800x600' }}" 
+             alt="{{ section.settings.womens_title | default: 'Shop Womens Apparel' }}" 
+             class="hero-image" 
+             loading="lazy">
+      {% else %}
+        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4A90E2, #7BB3F0); display: flex; align-items: center; justify-content: center;">
+          <div style="color: white; font-size: 72px;">👗</div>
+        </div>
+      {% endif %}
+
+      <div class="hero-overlay">
+        <h2 class="hero-title" style="color: white;">{{ section.settings.womens_title | default: "Shop Women's Apparel" }}</h2>
+        {% if section.settings.womens_subtitle %}
+          <p class="hero-subtitle" style="color: white;">{{ section.settings.womens_subtitle }}</p>
+        {% endif %}
+        <span class="hero-btn">{{ section.settings.womens_button_text | default: "Shop Now" }}</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Split Hero Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Men's Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "mens_image",
+      "label": "Men's Image"
+    },
+    {
+      "type": "text",
+      "id": "mens_title",
+      "label": "Men's Title",
+      "default": "Shop Men's Apparel"
+    },
+    {
+      "type": "text",
+      "id": "mens_subtitle",
+      "label": "Men's Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "mens_button_text",
+      "label": "Men's Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "mens_link",
+      "label": "Men's Link",
+      "info": "Leave empty to use default men's collection"
+    },
+    {
+      "type": "header",
+      "content": "Women's Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "womens_image",
+      "label": "Women's Image"
+    },
+    {
+      "type": "text",
+      "id": "womens_title",
+      "label": "Women's Title",
+      "default": "Shop Women's Apparel"
+    },
+    {
+      "type": "text",
+      "id": "womens_subtitle",
+      "label": "Women's Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "womens_button_text",
+      "label": "Women's Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "womens_link",
+      "label": "Women's Link",
+      "info": "Leave empty to use default women's collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Hero Banner"
+    }
+  ]
+}
+{% endschema %}

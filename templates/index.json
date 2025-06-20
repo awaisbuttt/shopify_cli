@@ -9,69 +9,41 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+    "marquee_img_yNdpyD": {
+      "type": "marquee-img",
+      "name": "Brand Logos",
       "settings": {
-        "image": "shopify://shop_images/250609-fl-recxl9gOR-nike-jordan-sale-hp-banner.gif",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "first8",
-        "products_to_show": 8,
-        "heading": "Featured Collection",
-        "heading_size": 32,
-        "heading_color": "#000000",
-        "sale_badge_text": "SALE",
-        "sale_badge_color": "#dc2626",
-        "sale_price_color": "#dc2626",
-        "background_color": "#ffffff",
-        "section_padding_top": 60,
-        "section_padding_bottom": 60
+        "show_title": true,
+        "section_title": "",
+        "show_subtitle": true,
+        "section_subtitle": "",
+        "boots_image": "shopify://shop_images/h_cat_1.webp",
+        "boots_title": "Boots",
+        "boots_link": "",
+        "casuals_image": "shopify://shop_images/h_cat_2.webp",
+        "casuals_title": "Casuals",
+        "casuals_link": "",
+        "sports_image": "shopify://shop_images/h_cat_3.webp",
+        "sports_title": "Sports",
+        "sports_link": "",
+        "sandals_image": "shopify://shop_images/h_cat_4.webp",
+        "sandals_title": "Sandals",
+        "sandals_link": "",
+        "mens_image": "shopify://shop_images/h_cat_5.webp",
+        "mens_title": "Mens Apparel",
+        "mens_link": "",
+        "womens_image": "shopify://shop_images/h_cat_6.webp",
+        "womens_title": "Womens Apparel",
+        "womens_link": ""
       }
     },
     "image_banner_hJdPBy": {
       "type": "image-banner",
       "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "image": "shopify://shop_images/Last-Minute_Gift_For_Dad_fdced426-40d8-4458-9774-25218e09ffc3.png",
+        "image": "shopify://shop_images/wdl_shoe_banner.webp",
         "image_overlay_opacity": 0,
-        "image_height": "medium",
+        "image_height": "small",
         "image_behavior": "none",
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
@@ -82,93 +54,48 @@
         "show_text_below": true
       }
     },
-    "marquee_img_yNdpyD": {
-      "type": "marquee-img",
-      "blocks": {
-        "logo_Nf6eN8": {
-          "type": "logo",
-          "settings": {
-            "logo_image": "shopify://shop_images/New-Balance-black-logo.svg",
-            "logo_alt_text": "Brand logo",
-            "logo_url": ""
-          }
-        },
-        "logo_YWXBQK": {
-          "type": "logo",
-          "settings": {
-            "logo_image": "shopify://shop_images/nike.svg",
-            "logo_alt_text": "Brand logo",
-            "logo_url": ""
-          }
-        },
-        "logo_mGKphp": {
-          "type": "logo",
-          "settings": {
-            "logo_image": "shopify://shop_images/Puma-black-logo.svg",
-            "logo_alt_text": "Brand logo",
-            "logo_url": ""
-          }
-        },
-        "logo_CMtrbP": {
-          "type": "logo",
-          "settings": {
-            "logo_image": "shopify://shop_images/sapphire-logo_8bea5b96-b83b-479b-9a85-1281fb072c4c.svg",
-            "logo_alt_text": "Brand logo",
-            "logo_url": ""
-          }
-        },
-        "logo_N86ANb": {
-          "type": "logo",
-          "settings": {
-            "logo_image": "shopify://shop_images/on-logo-black.svg",
-            "logo_alt_text": "Brand logo",
-            "logo_url": ""
-          }
-        },
-        "logo_jUThQN": {
-          "type": "logo",
-          "settings": {
-            "logo_image": "shopify://shop_images/birkenstock-black-logo.svg",
-            "logo_alt_text": "Brand logo",
-            "logo_url": ""
-          }
-        },
-        "logo_aTiDDh": {
-          "type": "logo",
-          "settings": {
-            "logo_image": "shopify://shop_images/asics.svg",
-            "logo_alt_text": "Brand logo",
-            "logo_url": ""
-          }
-        },
-        "logo_bGVYUF": {
-          "type": "logo",
-          "settings": {
-            "logo_image": "shopify://shop_images/adidas-originals.svg",
-            "logo_alt_text": "Brand logo",
-            "logo_url": ""
-          }
-        }
-      },
-      "block_order": [
-        "logo_Nf6eN8",
-        "logo_YWXBQK",
-        "logo_mGKphp",
-        "logo_CMtrbP",
-        "logo_N86ANb",
-        "logo_jUThQN",
-        "logo_aTiDDh",
-        "logo_bGVYUF"
-      ],
-      "name": "Brand Logos",
+    "featured_collection": {
+      "type": "featured-collection",
       "settings": {
-        "heading": "Shop Our Top Brands",
-        "heading_size": 24,
-        "view_all_text": "Explore all brands",
-        "view_all_url": "",
+        "collection": "first8",
+        "products_to_show": 8,
+        "heading": "",
+        "heading_size": 32,
+        "heading_color": "#832a2a",
+        "sale_badge_text": "SALE",
+        "sale_badge_color": "#1c8600",
+        "sale_price_color": "#1c8600",
         "background_color": "#ffffff",
-        "section_padding_top": 40,
-        "section_padding_bottom": 40
+        "section_padding_top": 60,
+        "section_padding_bottom": 60
+      }
+    },
+    "costomer_d6F4pQ": {
+      "type": "costomer",
+      "name": "Customer Services",
+      "settings": {
+        "title_1": "Bags",
+        "link_1": "",
+        "title_2": "Shoe Care",
+        "link_2": "",
+        "title_3": "Belts & More",
+        "link_3": ""
+      }
+    },
+    "cade_6FHERD": {
+      "type": "cade",
+      "name": "Split Hero Banner",
+      "settings": {
+        "mens_image": "shopify://shop_images/m_apparel_banner.webp",
+        "mens_title": "Shop Men's Apparel",
+        "mens_subtitle": "",
+        "mens_button_text": "Shop Now",
+        "mens_link": "",
+        "womens_image": "shopify://shop_images/f_apparel_banner.webp",
+        "womens_title": "Shop Women's Apparel",
+        "womens_subtitle": "",
+        "womens_button_text": "Shop Now",
+        "womens_link": ""
       }
     },
     "bar_nwCmif": {
@@ -180,7 +107,7 @@
             "title": "",
             "subtitle": "",
             "button_text": "Shop Now",
-            "image": "shopify://shop_images/aa.webp",
+            "image": "shopify://shop_images/insta_1.jpg",
             "custom_page": "",
             "link": "shopify://collections/all"
           }
@@ -188,10 +115,10 @@
         "category_C3yczr": {
           "type": "category",
           "settings": {
-            "title": "",
+            "title": "hi",
             "subtitle": "",
             "button_text": "Shop Now",
-            "image": "shopify://shop_images/bb.webp",
+            "image": "shopify://shop_images/insta_2.jpg",
             "custom_page": "",
             "link": "shopify://collections/all"
           }
@@ -202,7 +129,7 @@
             "title": "",
             "subtitle": "",
             "button_text": "Shop Now",
-            "image": "shopify://shop_images/cc.webp",
+            "image": "shopify://shop_images/insta_3.jpg",
             "custom_page": "",
             "link": "shopify://collections/all"
           }
@@ -256,7 +183,7 @@
             "title": "",
             "subtitle": "",
             "button_text": "Shop Now",
-            "image": "shopify://shop_images/m_600x400_crop_center_85156413-2f41-400e-aefe-af39dd628332.webp",
+            "image": "shopify://shop_images/insta_1.jpg",
             "custom_page": "",
             "link": "shopify://pages/man"
           }
@@ -374,90 +301,35 @@
         "section_padding_bottom": 60
       }
     },
-    "costomer_d6F4pQ": {
-      "type": "costomer",
-      "blocks": {
-        "service_kgJxjk": {
-          "type": "service",
-          "settings": {
-            "service_title": "Contact Us",
-            "icon_type": "contact",
-            "service_url": "shopify://pages/contact"
-          }
-        },
-        "service_KBC38n": {
-          "type": "service",
-          "settings": {
-            "service_title": "Order Status",
-            "icon_type": "order",
-            "service_url": ""
-          }
-        },
-        "service_RPmJee": {
-          "type": "service",
-          "settings": {
-            "service_title": "Shipping Info",
-            "icon_type": "shipping",
-            "service_url": ""
-          }
-        },
-        "service_nAaG9N": {
-          "type": "service",
-          "settings": {
-            "service_title": "Store Pickup",
-            "icon_type": "store",
-            "service_url": ""
-          }
-        },
-        "service_8bbJGL": {
-          "type": "service",
-          "settings": {
-            "service_title": "Returns-Exchanges",
-            "icon_type": "returns",
-            "service_url": ""
-          }
-        },
-        "service_JzbUBE": {
-          "type": "service",
-          "settings": {
-            "service_title": "Help",
-            "icon_type": "help",
-            "service_url": ""
-          }
-        }
-      },
-      "block_order": [
-        "service_kgJxjk",
-        "service_KBC38n",
-        "service_RPmJee",
-        "service_nAaG9N",
-        "service_8bbJGL",
-        "service_JzbUBE"
-      ],
-      "name": "Customer Services",
+    "image_banner_MJ38Rd": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "heading": "",
-        "heading_size": 28,
-        "background_color": "#f8f9fa",
-        "icon_background_color": "#e9ecef",
-        "icon_hover_color": "#dee2e6",
-        "icon_color": "#000000",
-        "text_color": "#000000",
-        "section_padding_top": 40,
-        "section_padding_bottom": 40
+        "image": "shopify://shop_images/woodsport_banner.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-5",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection",
-    "image_banner_hJdPBy",
     "marquee_img_yNdpyD",
+    "image_banner_hJdPBy",
+    "featured_collection",
+    "costomer_d6F4pQ",
+    "cade_6FHERD",
     "bar_nwCmif",
     "featured_collection_kM3LiW",
     "bar_kE68N3",
     "featured_collection_eeGWQe",
     "contec_PnUydw",
-    "costomer_d6F4pQ"
+    "image_banner_MJ38Rd"
   ]
 }
