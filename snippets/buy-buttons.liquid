@@ -1,18 +1,6 @@
-{% comment %}
-  Renders product buy-buttons.
-  Accepts:
-  - product: {Object} product object.
-  - block: {Object} passing the block information.
-  - product_form_id: {String} product form id.
-  - section_id: {String} id of section to which this snippet belongs.
-  - show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
-
-  Usage:
-  {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
-{% endcomment %}
 <div {{ block.shopify_attributes }}>
-  {%- if product != blank -%}
-    {%- liquid
+  {% if product != blank %}
+    {% liquid
       assign gift_card_recipient_feature_active = false
       if block.settings.show_gift_card_recipient and product.gift_card?
         assign gift_card_recipient_feature_active = true
@@ -22,7 +10,7 @@
       if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
         assign show_dynamic_checkout = true
       endif
-    -%}
+    %}
 
     <product-form
       class="product-form"
@@ -30,76 +18,97 @@
       data-section-id="{{ section.id }}"
     >
       <div class="product-form__error-message-wrapper" role="alert" hidden>
-        <span class="svg-wrapper">
-          {{- 'icon-error.svg' | inline_asset_content -}}
-        </span>
+        <span class="svg-wrapper">{{ 'icon-error.svg' | inline_asset_content }}</span>
         <span class="product-form__error-message"></span>
       </div>
 
-      {%- form 'product',
+      {% form 'product',
         product,
         id: product_form_id,
         class: 'form',
         novalidate: 'novalidate',
         data-type: 'add-to-cart-form'
-      -%}
+      %}
+
         <input
           type="hidden"
           name="id"
           value="{{ product.selected_or_first_available_variant.id }}"
-          {% if product.selected_or_first_available_variant.available == false
-            or quantity_rule_soldout
-            or product.selected_or_first_available_variant == null
-          %}
+          class="product-variant-id"
+          {% if product.selected_or_first_available_variant.available == false or product.selected_or_first_available_variant == null %}
             disabled
           {% endif %}
-          class="product-variant-id"
         >
 
-        {%- if gift_card_recipient_feature_active -%}
-          {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
-        {%- endif -%}
+        {% liquid
+          assign available_qty = product.selected_or_first_available_variant.inventory_quantity
+          assign check_against_inventory = true
+          if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+            assign check_against_inventory = false
+          endif
+          if product.selected_or_first_available_variant.quantity_rule.min > available_qty and check_against_inventory
+            assign quantity_rule_soldout = true
+          endif
+        %}
 
+        <!-- ✅ Quantity Selector with Stock Info Below -->
+        <div class="custom-quantity-wrapper">
+          <label for="Quantity-{{ section.id }}">Quantity</label>
+          <div class="quantity-selector">
+            <button type="button" class="qty-btn minus" aria-label="Decrease quantity">−</button>
+            <input
+              id="Quantity-{{ section.id }}"
+              type="number"
+              name="quantity"
+              min="1"
+              value="1"
+              class="quantity-input"
+            >
+            <button type="button" class="qty-btn plus" aria-label="Increase quantity">+</button>
+          </div>
+
+          {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+            <div class="stock-message" style="color: red;">
+              {{ 'products.product.sold_out' | t }}
+            </div>
+          {% else %}
+            <div class="stock-message" style="color: green;" data-available="{{ available_qty }}">
+              In stock — <span class="total-stock">{{ available_qty }}</span> available |
+              <span class="remaining-stock">{{ available_qty | minus: 1 }}</span> remaining
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- ✅ Add to Cart Button -->
         <div class="product-form__buttons">
-          {%- liquid
-            assign check_against_inventory = true
-            if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
-              assign check_against_inventory = false
-            endif
-            if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
-              assign quantity_rule_soldout = true
-            endif
-          -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
             class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
-            {% if product.selected_or_first_available_variant.available == false
-              or quantity_rule_soldout
-              or product.selected_or_first_available_variant == null
-            %}
+            {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout or product.selected_or_first_available_variant == null %}
               disabled
             {% endif %}
           >
             <span>
-              {%- if product.selected_or_first_available_variant == null -%}
+              {% if product.selected_or_first_available_variant == null %}
                 {{ 'products.product.unavailable' | t }}
-              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+              {% elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
                 {{ 'products.product.sold_out' | t }}
-              {%- else -%}
+              {% else %}
                 {{ 'products.product.add_to_cart' | t }}
-              {%- endif -%}
+              {% endif %}
             </span>
-            {%- render 'loading-spinner' -%}
+            {% render 'loading-spinner' %}
           </button>
-          {%- if show_dynamic_checkout -%}
+
+          {% if show_dynamic_checkout %}
             {{ form | payment_button }}
-          {%- endif -%}
+          {% endif %}
         </div>
-      {%- endform -%}
+      {% endform %}
     </product-form>
-  {%- else -%}
+  {% else %}
     <div class="product-form">
       <div class="product-form__buttons form">
         <button
@@ -112,40 +121,118 @@
         </button>
       </div>
     </div>
-  {%- endif -%}
-
-  {%- if show_pickup_availability -%}
-    {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
-
-    {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
-      | where: 'pick_up_enabled', true
-    -%}
-
-    <pickup-availability
-      class="product__pickup-availabilities quick-add-hidden"
-      {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}
-        available
-      {% endif %}
-      data-root-url="{{ routes.root_url }}"
-      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-      data-has-only-default-variant="{{ product.has_only_default_variant }}"
-      data-product-page-color-scheme="gradient color-{{ section.settings.color_scheme }}"
-    >
-      <template>
-        <pickup-availability-preview class="pickup-availability-preview">
-          <span class="svg-wrapper">
-            {{- 'icon-unavailable.svg' | inline_asset_content -}}
-          </span>
-          <div class="pickup-availability-info">
-            <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
-            <button class="pickup-availability-button link link--text underlined-link">
-              {{ 'products.product.pickup_availability.refresh' | t }}
-            </button>
-          </div>
-        </pickup-availability-preview>
-      </template>
-    </pickup-availability>
-
-    <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
-  {%- endif -%}
+  {% endif %}
 </div>
+
+<!-- ✅ JavaScript: Inventory - Cart Quantity - Input Quantity -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const wrapper = document.querySelector('.custom-quantity-wrapper');
+    const input = wrapper?.querySelector('.quantity-input');
+    const minus = wrapper?.querySelector('.minus');
+    const plus = wrapper?.querySelector('.plus');
+    const stockMessage = document.querySelector('.stock-message');
+    const addToCartBtn = document.querySelector('.product-form__submit');
+    const remainingEl = stockMessage?.querySelector('.remaining-stock');
+    const available = parseInt(stockMessage?.dataset.available || "0");
+    const variantId = document.querySelector('input.product-variant-id')?.value;
+
+    if (!wrapper || !input || !stockMessage) return;
+
+    let cartQty = 0;
+
+    // 🔁 Get cart quantity of current variant
+    fetch('/cart.js')
+      .then(res => res.json())
+      .then(cart => {
+        cart.items.forEach(item => {
+          if (item.id == variantId) {
+            cartQty = item.quantity;
+          }
+        });
+
+        updateRemaining();
+      });
+
+    function updateRemaining() {
+      let selectedQty = parseInt(input.value);
+      if (isNaN(selectedQty) || selectedQty < 1) selectedQty = 1;
+
+      const remaining = available - cartQty - selectedQty;
+
+      if (remainingEl) remainingEl.textContent = remaining >= 0 ? remaining : 0;
+      input.value = selectedQty;
+
+      // Disable Add to Cart if over available
+      if (selectedQty + cartQty > available || selectedQty < 1) {
+        addToCartBtn.disabled = true;
+      } else {
+        addToCartBtn.disabled = false;
+      }
+    }
+
+    minus.addEventListener('click', function () {
+      let val = parseInt(input.value);
+      if (val > 1) input.value = val - 1;
+      updateRemaining();
+    });
+
+    plus.addEventListener('click', function () {
+      let val = parseInt(input.value);
+      if ((val + cartQty) < available) input.value = val + 1;
+      updateRemaining();
+    });
+
+    input.addEventListener('input', updateRemaining);
+  });
+</script>
+
+<!-- ✅ Final CSS -->
+<style>
+  .custom-quantity-wrapper {
+    margin-bottom: 1rem;
+    font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #666; /* ✅ Light black border */
+    border-radius: 6px;
+    margin-bottom: 10px; /* ✅ spacing below buttons */
+    padding: 4px;
+  }
+
+  .qty-btn {
+    background: #f5f5f5;
+    border: none;
+    font-size: 22px;
+    width: 38px;
+    height: 38px;
+    line-height: 1;
+    cursor: pointer;
+    margin: 0 4px;
+    border-radius: 4px;
+  }
+
+  .qty-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .quantity-input {
+    width: 60px;
+    height: 38px;
+    text-align: center;
+    border: none;
+    font-size: 17px;
+  }
+
+  .stock-message {
+    font-size: 15px;
+    margin-top: 5px;
+  }
+</style>
